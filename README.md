@@ -1,66 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# todomanagement
+Laravel 12 Task Management App
+🔧 Features
+- Laravel 12 + Bootstrap UI
+- Custom authentication (no Breeze, Jetstream, or UI scaffolding)
+- Token-based authentication via middleware
+- Login using email or username
+- Password validation: must include uppercase, lowercase, special character, number, and min 6 characters
+- SweetAlert for notifications
+- Error messages shown below respective fields
+- Dashboard with:
+- Add Task button
+- Task list (title, description, status, start & due dates)
+- Task CRUD (create, edit, delete)
+- Status badge: Pending (yellow), In Progress (blue), Completed (green)
+- View task with "Enter Timesheet" button
+- Blade templates
+- Protected routes using custom `TokenAuthMiddleware`
+⚙️ Installation
+1. Clone the Repository
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+2. Install Dependencies
+composer install
+3. Setup Environment File
+cp .env.example .env
+php artisan key:generate
 
-## About Laravel
+4. Configure `.env`
+Update database credentials
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+5. Run Migrations
+php artisan migrate
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+6. Serve the App
+php artisan serve
+🧪 Authentication Rules
+- Username must be unique
+- Password must include:
+- At least one uppercase
+- At least one lowercase
+- At least one special character
+- At least one number
+- Minimum 6 characters
+- Login via username or email
+📁 Folder Structure Overview
+- app/Http/Controllers/AuthController.php – Handles register, login, logout, dashboard
+- app/Http/Controllers/TaskController.php – Task CRUD and view
+- app/Http/Middleware/TokenAuthMiddleware.php – Checks user token for route protection
+- resources/views/auth/ – Login and Register forms
+- resources/views/dashboard.blade.php – Main dashboard with task list
+- resources/views/tasks/ – Create, Edit, View blades
+- 
+📌 Routes Overview (web.php)
+| Route              | Method | Description              |
+|-------------------|--------|--------------------------|
+| /register         | GET/POST | User Registration       |
+| /login            | GET/POST | User Login              |
+| /dashboard        | GET    | User Dashboard (tasks)  |
+| /tasks            | GET    | Task List               |
+| /tasks/create     | GET    | Task Create Form        |
+| /tasks            | POST   | Store Task              |
+| /tasks/{id}/edit  | GET    | Edit Task               |
+| /tasks/{id}       | PUT    | Update Task             |
+| /tasks/{id}       | DELETE | Delete Task             |
+| /tasks/{id}/view  | GET    | View Task + Timesheet   |
+| /logout           | POST   | Logout                  |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+📝 Timesheet Feature
+Each task view includes a button "Enter Timesheet", which can be expanded later to track time logs per task.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+🧑‍💻 Author
+- Name: Sailesh Dakua
+- GitHub: [https://github.com/saileshdakua](https://github.com/saileshdakua/todomanagement)
+- 
+📄 License
+This project is open-source and free to use under the MIT license.
